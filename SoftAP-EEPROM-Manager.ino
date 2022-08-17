@@ -5,6 +5,7 @@
 
 //------------------- FUNCTION TO SAVE DATA ON EEPROM --------------------------
 void saveData(int addr, String data) {
+  
   int dataLength = data.length(); 
   char inchar[50]; 
   data.toCharArray(inchar, dataLength + 1);
@@ -24,6 +25,7 @@ void saveData(int addr, String data) {
 
 //------------------- FUNCTION TO READ DATA ON EEPROM --------------------------
 String readData(int addr) {
+  
    byte singleData;
    String stringData;
    
@@ -83,6 +85,7 @@ String endHtml = "</body>"
 
 //-------------- FUNCTION TO SET WIFI CONECTION ----------------
 void setWifi() {
+  
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid_OnEEPROM, pass_OnEEPROM);
   
@@ -131,6 +134,7 @@ void webApp() {
 
 //-------------- FUNCTION TO SET CONFIG MODE ----------------
 void setConfig() {
+  
   WiFi.softAP(ssidConf, passConf);
   WiFi.softAPConfig(ip, gateway, subnet);
   Serial.println("WebServer is running on:");
@@ -140,8 +144,8 @@ void setConfig() {
   availabeNetworks();
 
   // API END POINTS
-  server.on("/", webApp); //esta es la pagina de configuracion
-  server.on("/guardar_conf", saveConfig); //Graba en la eeprom la configuracion
+  server.on("/", webApp); 
+  server.on("/guardar_conf", saveConfig);
 
   server.begin();
 
@@ -151,6 +155,18 @@ void setConfig() {
 
 }
 
+
+//-------------- FUNCTION TO SAVE DATA FROM WEB APP TO EEPROM ----------------
+void saveConfig() {
+   
+  // get the values from web app form and save them on EEPROM memory
+  saveData(0,server.arg("ssid"));
+  saveData(50,server.arg("pass"));
+
+  networksItems = "SETTING WERE SAVED... REBOOT YOUR DEVICE";
+  webApp();
+  
+}
 
 
 void setup() {
