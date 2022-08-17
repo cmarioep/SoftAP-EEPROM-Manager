@@ -169,8 +169,26 @@ void saveConfig() {
 }
 
 
+//-------------- MAIN FUNCTION ----------------
 void setup() {
-  // put your setup code here, to run once:
+  
+  Serial.begin(115200);
+  Serial.print("....");
+  delay(1000);
+
+  EEPROM.begin(512);
+
+  pinMode(D5, INPUT);
+  
+  if (digitalRead(D5) == 0) {
+    setConfig();
+  } else {
+    
+      readDatar(0).toCharArray(ssid, 50);
+      leerreadData(50). toCharArray(pass, 50);
+
+      setWifi();
+  }
 
 }
 
