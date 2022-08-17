@@ -3,7 +3,44 @@
 #include <EEPROM.h>
 
 
-//------------------- ENVIRONMENT VARIABLES --------------------------
+//------------------- FUNCTION TO SAVE DATA ON EEPROM --------------------------
+void saveData(int addr, String data) {
+  int dataLength = data.length(); 
+  char inchar[50]; 
+  data.toCharArray(inchar, dataLength + 1);
+  
+  for (int i = 0; i < dataLength; i++) {
+    EEPROM.write(addr+i, inchar[i]);
+  }
+  
+  for (int i = dataLength; i < 50; i++) {
+    EEPROM.write(addr+i, 255);
+  }
+  
+  EEPROM.commit();
+  
+}
+
+
+//------------------- FUNCTION TO READ DATA ON EEPROM --------------------------
+String readData(int addr) {
+   byte singleData;
+   String stringData;
+   
+   for (int i = addr; i < addr + 50; i++) {
+      singleData = EEPROM.read(i);
+      
+      if (singleData != 255) {
+        stringData += (char)singleData;
+      }
+      
+   }
+   
+   return stringData;
+}
+
+
+//------------------- ENVIRONMENT VARIABLES ON EEPROM --------------------------
 char ssid_OnEEPROM[50];      
 char pass_OnEEPROM[50];
 
