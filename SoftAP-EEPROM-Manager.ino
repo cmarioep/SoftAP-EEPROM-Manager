@@ -48,11 +48,11 @@ char passSTA[50];
 
 
 //------------------- SOFT-AP SETTINGS --------------------------
-const char *ssidConf = "ESP8266";
+const char *ssidConf = "SoftAP";
 const char *passConf = "admin123456";
 
-//IPAddress ip(192, 168, 1, 1);
-//IPAddress gateway(192, 168, 1, 254);
+//IPAddress ip(192, 168, 0, 1);
+//IPAddress gateway(192, 168, 0, 254);
 //IPAddress subnet(255, 255, 255, 0);
 
 
@@ -95,10 +95,10 @@ void setWifi() {
       delay(300);
   }
 
-  Serial.println();
-  Serial.print("Connected with IP: ");
-  Serial.println(WiFi.localIP());
-  Serial.println();
+  Serial.print("");
+  Serial.println("Connected with IP: ");
+  Serial.print(WiFi.localIP());
+  Serial.println("");
 
 }
 
@@ -136,16 +136,16 @@ void webApp() {
 void setConfig() {
   
   WiFi.softAP(ssidConf, passConf);
- // WiFi.softAPConfig(ip, gateway, subnet);
-  Serial.println("WebServer is running on:");
-  Serial.println(WiFi.softAPIP());
-  Serial.println();
+//  WiFi.softAPConfig(ip, gateway, subnet);
+  Serial.println("WebServer is running on: ");
+  Serial.print(WiFi.softAPIP());
+  Serial.println("");
 
   availabeNetworks();
 
   // API END POINTS
   server.on("/", webApp); 
-  server.on("/guardar_conf", saveConfig);
+  server.on("/saveConfig", saveConfig);
 
   server.begin();
 
@@ -172,25 +172,37 @@ void saveConfig() {
 //-------------- MAIN FUNCTION ----------------
 void setup() {
   
+
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(D5, INPUT_PULLUP);
+ 
   Serial.begin(115200);
-  Serial.print("....");
-  delay(1000);
 
-  EEPROM.begin(512);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(5000);
 
-  setConfig();
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(5000);
+
   
-//  pinMode(D5, INPUT);
-//
-//  if (digitalRead(D5) == 0) {
-//    setConfig();
-//  } else {
-//    
-//      readData(0).toCharArray(ssidSTA, 50);
-//      readData(50).toCharArray(ssidSTA, 50);
-//
-//      setWifi();
-//  }
+  if (digitalRead(D5) == 0) {
+    setConfig();
+  } else {
+      EEPROM.begin(512);
+      readData(0).toCharArray(ssidSTA, 50);
+      readData(50).toCharArray(ssidSTA, 50);
+     
+       setWifi();
+  }
 
 }
 
