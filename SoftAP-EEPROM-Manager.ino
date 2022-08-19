@@ -3,6 +3,9 @@
 #include <EEPROM.h>
 
 
+unsigned long previousMillis = 0;
+int contconexion = 0;
+
 //------------------- FUNCTION TO SAVE DATA ON EEPROM --------------------------
 void saveData(int addr, String data) {
   
@@ -89,8 +92,9 @@ void setWifi() {
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssidSTA, passSTA);
   
-  while (WiFi.status() != WL_CONNECTED)
+  while (WiFi.status() != WL_CONNECTED and contconexion <10)
   {
+    ++contconexion;
       Serial.print(".");
       delay(300);
   }
@@ -106,7 +110,7 @@ void setWifi() {
 //-------------- FUNCTION TO SCAN AVAILABLE NETWORKS ----------------
 String networksItems = "";
 
-void availabeNetworks() {  
+void scanForNetworks() {  
   int listOfNetwoks = WiFi.scanNetworks(); // return available networks
 
   if (listOfNetwoks == 0) {
@@ -133,7 +137,7 @@ void webApp() {
 
 
 //-------------- FUNCTION TO SET CONFIG MODE ----------------
-void setConfig() {
+void setConfigMode() {
   
   WiFi.softAP(ssidConf, passConf);
 //  WiFi.softAPConfig(ip, gateway, subnet);
@@ -141,7 +145,7 @@ void setConfig() {
   Serial.print(WiFi.softAPIP());
   Serial.println("");
 
-  availabeNetworks();
+  scanForNetworks();
 
   // API END POINTS
   server.on("/", webApp); 
@@ -150,7 +154,7 @@ void setConfig() {
   server.begin();
 
   while (true) {
-      server.handleClient();
+    server.handleClient();
   }
 
 }
@@ -180,7 +184,11 @@ void setup() {
 
   digitalWrite(LED_BUILTIN, LOW);
   delay(5000);
-
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(100);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(100);
+  digitalWrite(LED_BUILTIN, HIGH);
   delay(100);
   digitalWrite(LED_BUILTIN, LOW);
   delay(100);
@@ -192,21 +200,29 @@ void setup() {
   delay(100);
   digitalWrite(LED_BUILTIN, LOW);
   delay(5000);
+  digitalWrite(LED_BUILTIN, HIGH);
 
+  EEPROM.begin(512);
   
   if (digitalRead(D5) == 0) {
-    setConfig();
-  } else {
-      EEPROM.begin(512);
-      readData(0).toCharArray(ssidSTA, 50);
-      readData(50).toCharArray(ssidSTA, 50);
-     
-       setWifi();
+    setConfigMode();
   }
+  
+  readData(0).toCharArray(ssidSTA, 50);
+  readData(50).toCharArray(passSTA, 50);
+    
+  setWifi();
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
 
+  unsigned long currentMillis = millis();
+
+  if (currentMillis - previousMillis >= 5000) { //envia la temperatura cada 5 segundos
+    previousMillis = currentMillis;
+    Serial.println("Funcionado...");
+    Serial.println(ssidSTA);
+    Serial.println(passSTA);
+  }
 }
