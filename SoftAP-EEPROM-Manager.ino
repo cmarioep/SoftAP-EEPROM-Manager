@@ -43,17 +43,17 @@ String readData(int addr) {
 
 
 //------------------- ENVIRONMENT VARIABLES ON EEPROM --------------------------
-char ssid_OnEEPROM[50];      
-char pass_OnEEPROM[50];
+char ssidSTA[50];      
+char passSTA[50];
 
 
 //------------------- SOFT-AP SETTINGS --------------------------
-const char *ssidConf = "admin";
-const char *passConf = "admin";
+const char *ssidConf = "ESP8266";
+const char *passConf = "admin123456";
 
-IPAddress ip(192, 168, 1, 1);
-IPAddress gateway(192, 168, 1, 254);
-IPAddress subnet(255, 255, 255, 0);
+//IPAddress ip(192, 168, 1, 1);
+//IPAddress gateway(192, 168, 1, 254);
+//IPAddress subnet(255, 255, 255, 0);
 
 
 //-------------- WEB APP HTML DECLARATIONS ----------------
@@ -76,7 +76,7 @@ String htmlForm = "</form>"
 "PASSWORD:<br><br>"
 "<input class='input1' name='pass' type='password'><br><br>"
 "<input class='boton' type='submit' value='GUARDAR'/><br><br>"
-"</form>"
+"</form>";
 
 //-------------- WEB APP END
 String endHtml = "</body>"
@@ -87,7 +87,7 @@ String endHtml = "</body>"
 void setWifi() {
   
   WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid_OnEEPROM, pass_OnEEPROM);
+  WiFi.begin(ssidSTA, passSTA);
   
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -112,19 +112,19 @@ void availabeNetworks() {
   if (listOfNetwoks == 0) {
     networksItems = "There are not available networks";
   } else {
-    networksItems = "";
-    
-    for (int i = 0; i < networksItems; ++i)
-    {
+  
+    for (int i = 0; i < listOfNetwoks; i++) {
       networksItems = (networksItems) + "<p>" + String(i + 1) + ": " + WiFi.SSID(i) + " (" + WiFi.RSSI(i) + ")" + " </p>\r\n";
-      delay(10);
+      delay(10);      
     }
+    
   }
   
 }
 
 
 //-------------- SERVER SETTINGS ----------------
+WiFiClient espClient;
 ESP8266WebServer server(80);
 
 void webApp() {
@@ -136,7 +136,7 @@ void webApp() {
 void setConfig() {
   
   WiFi.softAP(ssidConf, passConf);
-  WiFi.softAPConfig(ip, gateway, subnet);
+ // WiFi.softAPConfig(ip, gateway, subnet);
   Serial.println("WebServer is running on:");
   Serial.println(WiFi.softAPIP());
   Serial.println();
@@ -178,17 +178,19 @@ void setup() {
 
   EEPROM.begin(512);
 
-  pinMode(D5, INPUT);
+  setConfig();
   
-  if (digitalRead(D5) == 0) {
-    setConfig();
-  } else {
-    
-      readDatar(0).toCharArray(ssid, 50);
-      leerreadData(50). toCharArray(pass, 50);
-
-      setWifi();
-  }
+//  pinMode(D5, INPUT);
+//
+//  if (digitalRead(D5) == 0) {
+//    setConfig();
+//  } else {
+//    
+//      readData(0).toCharArray(ssidSTA, 50);
+//      readData(50).toCharArray(ssidSTA, 50);
+//
+//      setWifi();
+//  }
 
 }
 
