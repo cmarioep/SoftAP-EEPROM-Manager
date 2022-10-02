@@ -1,5 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
+#include <ArduinoJson.h>
 #include <EEPROM.h>
 
 
@@ -136,6 +137,42 @@ void webApp() {
 }
 
 
+//-------------- FUNCTION TO SCAN AVAILABLE NETWORKS RETURN JSON----------------
+void scanAvailableNetworks() {
+
+  StaticJsonDocument<1024> jsonDocument;
+  JsonArray jsonArray = jsonDocument.to<JsonArray>();
+
+  int listOfNetwoks = WiFi.scanNetworks();
+  String networksItems ="";
+
+  if (listOfNetwoks == 0) {
+    networksItems = "There are not available networks";
+  } else {
+  
+    for (int i = 0; i < listOfNetwoks; i++) {
+
+      StaticJsonDocument<128> tmpJsonDocument;
+      JsonObject tmpObject = tmpJsonDocument.to<JsonObject>();
+
+      tmpObject["id"] = i;
+      tmpObject["ssid"] = WiFi.SSID(i);
+      tmpObject["rssi"] = WiFi.RSSI(i);
+
+      jsonArray.add(tmpObject);
+
+      delay(10);      
+    }
+
+    String jsonBuffer;
+    serializeJson(jsonDocument, jsonBuffer);
+    server.send(200, "application/json", jsonBuffer);
+      
+  }  
+
+}
+
+
 //-------------- FUNCTION TO SET CONFIG MODE ----------------
 void setConfigMode() {
   
@@ -150,6 +187,7 @@ void setConfigMode() {
   // API END POINTS
   server.on("/", webApp); 
   server.on("/saveConfig", saveConfig);
+  server.on("/wifiscan", HTTP_GET, scanAvailableNetworks);
 
   server.begin();
 
