@@ -7,12 +7,12 @@ export const Home = () => {
         <div className="app-container abs-100vh ">
 
             <header className="app-container-title">
-                <h1>Smart Switch</h1>
+                <h1>ESP Wifi-Mannager</h1>
             </header>
 
             <div className="app-container-items border-top">
-                <Button label="Config Smart Switch" link="google.com" />
-                <Button label="Config Wifi" link="/wificonfig" />
+                <Button label="Wifi Configuration" link="google.com" />
+                <Button label="General Configuration" link="/wificonfig" />
                 <Button label="Restart" link="google.com" />
             </div>
 
