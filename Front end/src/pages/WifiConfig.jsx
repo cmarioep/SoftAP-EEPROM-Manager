@@ -1,5 +1,5 @@
 import { NetworkItem } from "../components/NetworkItem";
-import { listOfNetworks } from "../../data";
+import { listOfNetworks } from "../FakeData";
 
 
 export const WifiConfig = () => {
