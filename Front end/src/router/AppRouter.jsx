@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Home, WifiConfig } from './pages/';
+import { Home, WifiConfig } from '../pages/';
 
 
 export const AppRouter = () => {
