@@ -1,4 +1,4 @@
-import '../assets/styles/components/Button.scss';
+import '../styles/components/Button.scss';
 
 export const Button = ({ label, link }) => {
 

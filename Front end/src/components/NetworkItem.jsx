@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { WeakSignal, FairSignal, GoodSignal, ExcelentSignal } from "./icons";
 
-import '../assets/styles/components/NetworkItem.scss';
+import '../styles/components/NetworkItem.scss';
 
 
 export const NetworkItem = ({ ssid, rssi }) => {
