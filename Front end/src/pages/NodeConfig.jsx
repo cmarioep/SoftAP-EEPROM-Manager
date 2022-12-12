@@ -1,3 +1,5 @@
+import { NodeInfo } from "../FakeData";
+
 
 export const NodeConfig = () => {
 
@@ -10,9 +12,9 @@ export const NodeConfig = () => {
             </header>
 
             <div className="app-container-items border-top">
-                <p>SSID:</p>
-                <p>IP:</p>
-                <p>Mac:</p>
+                <p>SSID:  <span>{NodeInfo.ssid}</span> </p>
+                <p>IP: <span>{NodeInfo.ip}</span></p>
+                <p>Mac: <span>{NodeInfo.mac}</span></p>
 
             </div>
 

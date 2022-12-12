@@ -30,3 +30,10 @@ export const listOfNetworks = [
     "rssi": -77
   }
 ]
+
+
+export const NodeInfo = {
+  ssid: "MyNode",
+  ip: "192.168.1.4",
+  mac: "15:53:AB:5D:AF"
+}
