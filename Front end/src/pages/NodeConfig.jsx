@@ -12,10 +12,17 @@ export const NodeConfig = () => {
             </header>
 
             <div className="app-container-items border-top">
-                <p>SSID:  <span>{NodeInfo.ssid}</span> </p>
-                <p>IP: <span>{NodeInfo.ip}</span></p>
-                <p>Mac: <span>{NodeInfo.mac}</span></p>
+                <div className="app-container-items-generalinfo">
+                    <p><span className="app-container-items-generalinfo-label">SSID:</span>
+                        <span className="app-container-items-generalinfo-info">{NodeInfo.ssid}</span> </p>
 
+                    <p><span className="app-container-items-generalinfo-label">IP:</span>
+                        <span className="app-container-items-generalinfo-info">{NodeInfo.ip}</span></p>
+
+                    <p><span className="app-container-items-generalinfo-label">MAC:</span>
+                        <span className="app-container-items-generalinfo-info">{NodeInfo.mac}</span></p>
+
+                </div>
             </div>
 
         </div>
