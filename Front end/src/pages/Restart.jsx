@@ -7,7 +7,7 @@ export const Restart = () => {
                 <h1>ESP Wifi-Mannager</h1>
             </header>
 
-            <div className="app-container-items border-top">
+            <div className="app-container-items justify-center border-top">
                 <p>The device will be restart</p>
             </div>
 

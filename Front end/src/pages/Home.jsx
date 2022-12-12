@@ -10,7 +10,7 @@ export const Home = () => {
                 <h1>ESP Wifi-Mannager</h1>
             </header>
 
-            <div className="app-container-items border-top">
+            <div className="app-container-items justify-center border-top">
                 <Button label="Wifi Configuration" link="/wificonfig" />
                 <Button label="General Configuration" link="/nodeconfig" />
                 <Button label="Restart" link="/restart" />

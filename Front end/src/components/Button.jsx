@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import '../styles/components/Button.scss';
+import '../styles/components/_Button.scss';
 
 export const Button = ({ label, link }) => {
 
