@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 import '../styles/components/Button.scss';
 
 export const Button = ({ label, link }) => {
 
     return (
-        <a className='Button' href={link} rel="noreferrer">{label}</a>
+        <Link className='Button' to={link} rel="noreferrer">{label}</Link>
     )
 
 }
