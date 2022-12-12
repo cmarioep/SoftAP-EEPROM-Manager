@@ -11,9 +11,9 @@ export const Home = () => {
             </header>
 
             <div className="app-container-items border-top">
-                <Button label="Wifi Configuration" link="google.com" />
-                <Button label="General Configuration" link="/wificonfig" />
-                <Button label="Restart" link="google.com" />
+                <Button label="Wifi Configuration" link="/wificonfig" />
+                <Button label="General Configuration" link="/nodeconfig" />
+                <Button label="Restart" link="/restart" />
             </div>
 
         </div>
