@@ -1,5 +1,6 @@
-import { NetworkItem } from "../components/NetworkItem";
 import { listOfNetworks } from "../FakeData";
+import { NetworkItem } from "../components/NetworkItem";
+import { TapBar } from "../components/TapBar";
 
 
 export const WifiConfig = () => {
@@ -12,7 +13,7 @@ export const WifiConfig = () => {
                 <h1>Available Networks</h1>
             </header>
 
-            <ul className="app-container-items border-top">
+            <ul className="app-container-items">
                 {
                     listOfNetworks.map(Network =>
                         <NetworkItem
@@ -23,8 +24,12 @@ export const WifiConfig = () => {
                 }
             </ul>
 
+            <TapBar />
 
         </div>
+
     )
 
 }
+
+

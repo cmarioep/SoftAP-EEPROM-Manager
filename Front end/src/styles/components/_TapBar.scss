@@ -1,0 +1,30 @@
+.tapBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 4rem;
+    border-top: 0.5px solid #8892b0;
+
+    &-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 2rem;
+
+        p {
+            margin-left: 1rem;
+
+            font-size: 1.5rem;
+            color: #8892b0;
+            // font-weight: bold;
+        }
+    }
+    
+}

@@ -11,7 +11,7 @@ export const NodeConfig = () => {
                 <h1>General Config</h1>
             </header>
 
-            <div className="app-container-items border-top">
+            <div className="app-container-items">
                 <div className="app-container-items-generalinfo">
                     <p><span className="app-container-items-generalinfo-label">SSID:</span>
                         <span className="app-container-items-generalinfo-info">{NodeInfo.ssid}</span> </p>
