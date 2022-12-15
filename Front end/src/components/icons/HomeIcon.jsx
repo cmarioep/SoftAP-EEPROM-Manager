@@ -5,10 +5,10 @@ export const HomeIcon = (props) => (
     <path
       style={{
         fill: "none",
-        strokeWidth: 1.5,
+        strokeWidth: 2,
         strokeLinecap: "round",
         strokeLinejoin: "round",
-        stroke: "#8892b0",
+        stroke: "#cbd5f6",
         strokeOpacity: 1,
         strokeMiterlimit: 4,
       }}
@@ -18,10 +18,10 @@ export const HomeIcon = (props) => (
     <path
       style={{
         fill: "none",
-        strokeWidth: 1.5,
+        strokeWidth: 2,
         strokeLinecap: "round",
         strokeLinejoin: "round",
-        stroke: "#8892b0",
+        stroke: "#cbd5f6",
         strokeOpacity: 1,
         strokeMiterlimit: 4,
       }}

@@ -8,7 +8,7 @@ export const TapBar = () => {
         <nav className="tapBar" >
             <div className="tapBar-icon">
                 <HomeIcon className="tapBar-icon"/>
-                <p>Main</p>
+                <p>Home</p>
             </div>
         </nav>
     )
