@@ -1,3 +1,6 @@
+@use '../utils/' as *;
+
+
 .Button {
     display: flex;
     justify-content: center;
@@ -6,11 +9,11 @@
     width: 70%;
     height: 35px;
     padding: 1.5rem;
-    border: 0.5px solid #64ffda;
+    border: 0.5px solid $clr-green;
     border-radius: 0.25rem;
     margin: 0.5rem 0;
 
-    color: #64ffda;
+    color: $clr-primary;
     text-decoration: none;
 }
 

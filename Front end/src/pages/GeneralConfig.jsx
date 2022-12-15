@@ -1,7 +1,7 @@
 import { NodeInfo } from "../FakeData";
 
 
-export const NodeConfig = () => {
+export const GeneralConfig = () => {
 
 
     return (

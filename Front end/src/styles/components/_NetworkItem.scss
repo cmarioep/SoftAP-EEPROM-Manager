@@ -1,5 +1,6 @@
 @use '../utils/' as *;
 
+
 .networkItem {
 
     display: flex;
@@ -12,7 +13,7 @@
     margin: 0.5rem auto;
 
 
-    border: 0.5px solid #64ffda;
+    border: 0.5px solid $clr-green;
     border-radius: 0.5rem;
 
 
@@ -34,7 +35,7 @@
     &__info {
         margin-bottom: 1rem;
 
-        
+
         &__icon {
             display: flex;
             justify-content: center;
@@ -44,18 +45,18 @@
         &__ssid {
             width: 100%;
             padding-left: 1rem;
-            
-            color: #8892b0;
+
+            color: $clr-secondary;
 
             input {
                 width: 100%;
                 border: none;
                 outline: none;
-                
+
                 font-size: 1.1rem;
                 font-weight: 600;
-                color: #ccd6f6;
-                
+                color: $clr-primary;
+
             }
         }
     }
@@ -73,24 +74,24 @@
             padding-left: 0.5rem;
             border: unset;
             outline: unset;
-            border: 0.5px solid #64ffda;
+            border: 0.5px solid $clr-green;
             border-radius: 0.25rem;
-            
+
             font-size: 1.1rem;
-            color: #64ffda;
+            color: $clr-green;
 
             &::placeholder {
                 font-size: 0.9rem;
-                color: #8892b0;
+                color: $clr-secondary;
             }
         }
 
         &__button {
             height: 33px;
             padding: 0.5rem 1.5rem;
-            border: 0.5px solid #64ffda;
+            border: 0.5px solid $clr-green;
             border-radius: 0.25rem;
-            color: #64ffda;
+            color: $clr-green;
         }
 
     }
