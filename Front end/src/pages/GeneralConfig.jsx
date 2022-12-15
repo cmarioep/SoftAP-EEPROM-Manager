@@ -1,3 +1,4 @@
+import { TapBar } from "../components/TapBar";
 import { NodeInfo } from "../FakeData";
 
 
@@ -21,9 +22,10 @@ export const GeneralConfig = () => {
 
                     <p><span className="app-container-items-generalinfo-label">MAC:</span>
                         <span className="app-container-items-generalinfo-info">{NodeInfo.mac}</span></p>
-
                 </div>
             </div>
+
+            <TapBar />
 
         </div>
     )
