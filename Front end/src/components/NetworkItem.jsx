@@ -15,6 +15,7 @@ import '../styles/components/_NetworkItem.scss';
 export const NetworkItem = ({ ssid, rssi }) => {
 
     const { setIcon } = useSetSignalIcon();
+    const {inputText, onInputChange, handleSubmit} = useHandleForm({ ssid, password: '' });
 
 
     const [isActive, setIsActive] = useState(false);
@@ -22,10 +23,6 @@ export const NetworkItem = ({ ssid, rssi }) => {
     const onClickHandler = () => {
         setIsActive(!isActive)
     }
-
-
-    const {inputText, onInputChange, handleSubmit} = useHandleForm({ ssid, password: '' });
-
 
 
     return (
