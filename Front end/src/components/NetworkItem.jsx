@@ -1,11 +1,21 @@
 import { useState } from "react";
 
-import { WeakSignal, FairSignal, GoodSignal, ExcelentSignal } from "./icons";
+
+import { useHandleForm } from "../hooks/useHandleForm";
+
+
+import { useSetSignalIcon } from "../hooks/useSetSignalIcon";
+
 
 import '../styles/components/_NetworkItem.scss';
 
 
+
+
 export const NetworkItem = ({ ssid, rssi }) => {
+
+    const { setIcon } = useSetSignalIcon();
+
 
     const [isActive, setIsActive] = useState(false);
 
@@ -13,46 +23,25 @@ export const NetworkItem = ({ ssid, rssi }) => {
         setIsActive(!isActive)
     }
 
-    const signal = rssi;
 
-    const matchIcon = () => {
-
-        const signalValue = Math.abs(signal);
-
-        if (signalValue > 70) {
-            return <WeakSignal />
-        }
-
-        if (signalValue > 65 && signalValue <= 70) {
-            return <FairSignal />
-        }
-
-        if (signalValue > 50 && signalValue <= 65) {
-            return <GoodSignal />
-        }
-
-        if (signalValue <= 50) {
-            return <ExcelentSignal />
-        }
-
-    }
+    const {inputText, onInputChange, handleSubmit} = useHandleForm({ ssid, password: '' });
 
 
 
     return (
 
-        <form className="networkItem" action="saveConfig" method='get'>
+        <form className="networkItem" onSubmit={handleSubmit}>
 
             <div className="networkItem__info" onClick={onClickHandler}>
 
                 <div className="networkItem__info__icon">
-                    {matchIcon()}
+                    {setIcon(rssi)}
                 </div>
 
                 <label className="networkItem__info__ssid" htmlFor="ssid">
-                    <input type="text"
-                        name="ssid"
-                        value={ssid}
+                    <input
+                        type="text"
+                        defaultValue={ssid}
                         readOnly
                     />
                     Tap to config
@@ -64,12 +53,14 @@ export const NetworkItem = ({ ssid, rssi }) => {
             {
                 (isActive && <div className="networkItem__pass">
 
-                    <label className="networkItem__pass__label" htmlFor="pass">
+                    <label className="networkItem__pass__label" htmlFor="password">
                         <input
                             className="networkItem__pass__input"
                             type="password"
-                            name="pass"
+                            name="password"
                             placeholder="Password"
+                            value={inputText.password}
+                            onChange={onInputChange}
                         />
                     </label>
 
@@ -88,3 +79,4 @@ export const NetworkItem = ({ ssid, rssi }) => {
     )
 
 }
+
