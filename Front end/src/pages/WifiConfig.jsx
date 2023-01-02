@@ -1,10 +1,12 @@
-import { NetworkItem } from "../components/NetworkItem";
-import { TapBar } from "../components/TapBar";
-
 import { useFetchData } from '../hooks/useFetchData';
 
 
+import { NetworkItem } from "../components/NetworkItem";
+import { TapBar } from "../components/TapBar";
+
+
 const listOfNetworks = 'http://localhost:3500/wifiscan';
+
 
 
 export const WifiConfig = () => {
