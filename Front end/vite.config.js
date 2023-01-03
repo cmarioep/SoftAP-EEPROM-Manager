@@ -8,7 +8,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        dir: '../Firmware/SoftAP-SPIFFS-Manager/data',
+        dir: '../Firmware/SoftAP-WiFi-Credentials-Manager/data',
         assetFileNames: 'styles.css',
         entryFileNames: 'main.js',
       }
