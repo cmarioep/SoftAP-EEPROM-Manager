@@ -12,6 +12,10 @@ ESP8266WebServer server(80);
 const char *ssidConf = "SoftAP";
 const char *passConf = "admin123456";
 
+IPAddress ip(192,168,4,1);     
+IPAddress gateway(192,168,4,1);   
+IPAddress subnet(255,255,255,0);   
+
 
 
 //-------------- FUNCTION TO SCAN AVAILABLE NETWORKS RETURN JSON----------------
@@ -91,6 +95,7 @@ void setWifiSettings() {
 void setConfigMode() {
   
   WiFi.softAP(ssidConf, passConf);
+  WiFi.config(ip, gateway, subnet);
   Serial.println("WebServer is running on: ");
   Serial.print(WiFi.softAPIP());
   Serial.println("");
