@@ -98,6 +98,7 @@ void setConfigMode() {
   server.on("/", serveHTML);
   server.on("/styles.css", serveStyles);
   server.on("/main.js", serveJavaScript);
+  server.on("/favicon.svg", serveFavicon);
   
 
   // API END POINTS
@@ -205,7 +206,15 @@ void serveStyles(){
 
 // Route for javascript file / SoftAP
 void serveJavaScript(){
-  File styles = SPIFFS.open("/main.js","r");
-  server.streamFile(styles, "text/javascript");
-  styles.close();
+  File javascript = SPIFFS.open("/main.js","r");
+  server.streamFile(javascript, "text/javascript");
+  javascript.close();
+}
+
+
+// Route for favicon file / SoftAP
+void serveFavicon(){
+  File favicon = SPIFFS.open("/favicon.svg","r");
+  server.streamFile(favicon, "image/svg+xml");
+  favicon.close();
 }
