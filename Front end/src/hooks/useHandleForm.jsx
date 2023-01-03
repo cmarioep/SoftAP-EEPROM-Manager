@@ -5,7 +5,7 @@ const setWifiConfig = async (wifiConfig) => {
 
     try {
 
-        const response = await fetch('http://localhost:3500/setwificonfig', {
+        const response = await fetch('http://192.168.4.1/setwificonfig', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
