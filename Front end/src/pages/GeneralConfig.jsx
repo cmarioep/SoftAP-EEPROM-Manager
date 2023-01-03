@@ -4,7 +4,7 @@ import { useFetchData } from '../hooks/useFetchData';
 import { TapBar } from "../components/TapBar";
 // import { NodeInfo } from "../FakeData";
 
-const nodeInfo = 'http://localhost:3500/nodeinfo';
+const nodeInfo = 'http://192.168.4.1/nodeinfo';
 
 
 

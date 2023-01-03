@@ -5,7 +5,7 @@ import { NetworkItem } from "../components/NetworkItem";
 import { TapBar } from "../components/TapBar";
 
 
-const listOfNetworks = 'http://localhost:3500/wifiscan';
+const listOfNetworks = 'http://192.168.4.1/wifiscan';
 
 
 
