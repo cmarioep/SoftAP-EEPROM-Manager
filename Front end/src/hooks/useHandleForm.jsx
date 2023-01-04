@@ -5,7 +5,7 @@ const setWifiConfig = async (wifiConfig) => {
 
     try {
 
-        const response = await fetch('http://192.168.4.1/setwificonfig', {
+        const response = await fetch('http://192.168.4.1/wifisettings', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ const setWifiConfig = async (wifiConfig) => {
         const status = response.status;
 
         if (status === 201) {
-            console.log('OK')
+            alert('WiFi settings has been saved successfully');
         }
 
 

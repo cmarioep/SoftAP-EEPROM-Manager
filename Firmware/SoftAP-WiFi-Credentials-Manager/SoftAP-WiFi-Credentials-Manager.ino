@@ -84,7 +84,7 @@ void setWifiSettings() {
   serializeJson(jBuffer, configFile);
   configFile.close();
   
-  server.send(200, "application/json", "{\"status\" : \"ok\"}");
+  server.send(201, "application/json", "{\"status\" : \"ok\"}");
   delay(500);
  
 }
