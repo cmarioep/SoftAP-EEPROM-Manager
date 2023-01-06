@@ -18,6 +18,7 @@ IPAddress subnet(255,255,255,0);
 
 
 
+
 //-------------- FUNCTION TO SCAN AVAILABLE NETWORKS RETURN JSON----------------
 void scanAvailableNetworks() {
   
@@ -72,26 +73,6 @@ void getNodeInfo() {
 }  
 
 
-void redData() {
-
-  if(SPIFFS.exists("/config.json")){
-    
-    File file = SPIFFS.open("/config.json", "r");
-    
-    while(file.available())
-    {
-      Serial.write(file.read());
-    }
-    
-    file.close();
-    
-  }  
-  
-}
-
-  
-  
-
 
 
 //-------------- FUNCTION TO SAVE WIFI SETTINGS----------------
@@ -99,21 +80,18 @@ void setWifiSettings() {
   
   String data = server.arg("plain");
   
-  // DEBUGGING
-  Serial.println("Server");
-  Serial.println(data);
-  
   DynamicJsonDocument jBuffer(1024);
   DeserializationError error = deserializeJson(jBuffer, data);
 
-  File configFile = SPIFFS.open("/config.json", "w");
+  File configFile = SPIFFS.open("/wificonfig.json", "w");
   serializeJson(jBuffer, configFile);
   configFile.close();
   
-  server.send(201, "application/json", "{\"status\" : \"ok\"}");
+  server.send(201);
   delay(500);
  
 }
+
 
 
 
@@ -150,18 +128,14 @@ void setConfigMode() {
 void wifiConnect() {
 
   //check for stored credentials
-  if(SPIFFS.exists("/config.json")) {
-    
+  if(SPIFFS.exists("/wificonfig.json")) {
+
     const char * _ssid = "", *_pass = "";
     
-    File configFile = SPIFFS.open("/config.json", "r");
+    File configFile = SPIFFS.open("/wificonfig.json", "r");
     
-    if(configFile) {
-
-      // DEBUGGING 
-      Serial.println('Desde FS');
-      Serial.write(configFile.read());
-      
+    if(configFile) {      
+   
       size_t size = configFile.size();
       std::unique_ptr<char[]> buf(new char[size]);
       configFile.readBytes(buf.get(), size);
@@ -176,18 +150,13 @@ void wifiConnect() {
       
         _ssid = jsonBuffer["ssid"];
         _pass = jsonBuffer["password"];
-        
-        // DEBUGGING 
-        Serial.println(_ssid);
-        Serial.println(_pass);
+                      
         
         WiFi.mode(WIFI_STA);
         WiFi.begin(_ssid, _pass);
         
-        int contconexion = 0;
-
-        while (WiFi.status() != WL_CONNECTED and contconexion <10) {
-          ++contconexion;
+        
+        while (WiFi.status() != WL_CONNECTED) {
           Serial.print(".");
           delay(300);
         }
@@ -215,10 +184,9 @@ void setup(){
   
   Serial.begin(115200);
   SPIFFS.begin();
-
-//  wifiConnect();
-  redData();
-  setConfigMode();
+  
+  wifiConnect();
+//  setConfigMode();
       
 }
 
@@ -227,8 +195,6 @@ void setup(){
 void loop(){
   
 }
-
-
 
 
 // Route for index HTML / SoftAP
