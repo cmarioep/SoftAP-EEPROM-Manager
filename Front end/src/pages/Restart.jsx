@@ -1,3 +1,6 @@
+import { TapBar } from "../components/TapBar";
+
+
 export const Restart = () => {
 
     return (
@@ -10,6 +13,8 @@ export const Restart = () => {
             <div className="app-container-items justify-center border-top">
                 <p>The device will be restart</p>
             </div>
+
+            <TapBar />
 
         </div>
     )
